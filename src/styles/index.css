@@ -4,6 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-mainblue: #200F5C;
+  --color-darkblue: #0C0620;
+  --color-boldgray: #F3F3F3;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-manrope);
@@ -118,4 +122,6 @@
   body {
     @apply bg-background text-foreground;
   }
+
+
 }
