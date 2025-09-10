@@ -16,7 +16,7 @@ export default function Header() {
 
   return (
     <header className="border-darkblue flex w-full items-center justify-between rounded-3xl border-b bg-white px-10 py-4">
-      <div className="text-darkblue flex items-center gap-2 text-2xl font-semibold">
+      <div className="text-darkblue flex items-center gap-2 text-3xl font-semibold">
         <SferaGlobe className="h-8 w-8" />
         SFERA
       </div>

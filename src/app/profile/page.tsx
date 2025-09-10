@@ -8,8 +8,15 @@ import SferaGlobe from "@/assets/globe.svg"
 import DefaultUser from "@/assets/defaultuser.svg"
 import Header from "@/shared/ui/Header"
 import ProfileMenuItem from "./components/ProfileMenuItem"
+import { auth } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const session = await auth()
+
+  if (!session) {
+    redirect("/auth/signin")
+  }
   const userInfo = [
     { href: "/profile/info", icon: Info, text: "Информация" },
     { href: "/profile/about", icon: Group, text: "О нас" },
@@ -18,7 +25,7 @@ export default function ProfilePage() {
 
   const otherItems = [
     { href: "/support", icon: Message, text: "Поддержка" },
-    { href: "/logout", icon: Logout, text: "Выход" },
+    { href: "/api/auth/signout", icon: Logout, text: "Выход" },
   ]
 
   return (
@@ -38,7 +45,9 @@ export default function ProfilePage() {
             <div className="relative mx-auto mb-4 flex h-20 w-20 items-center justify-center">
               <DefaultUser className="h-19 w-19" />
             </div>
-            <h1 className="text-darkblue mb-1 text-2xl font-semibold">Алина</h1>
+            <h1 className="text-darkblue mb-1 text-2xl font-semibold">
+              {session.user?.name || session.user?.email || "Пользователь"}
+            </h1>
             <div className="flex items-center justify-center gap-2 text-base text-gray-600">
               Пользователь
               <Pencil className="text-darkblue h-4 w-4" />

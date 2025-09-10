@@ -1,6 +1,11 @@
 import type { NextAuthConfig } from "next-auth"
 import type { Provider } from "next-auth/providers"
 import type { TokenSet } from "@auth/core/types"
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { prisma } from "../prisma"
+import Credentials from "next-auth/providers/credentials"
+import bcrypt from "bcryptjs"
+import { z } from "zod"
 
 interface VkUserInfoRequest {
   tokens: TokenSet
@@ -63,8 +68,43 @@ const VKProvider: Provider = {
   },
 }
 
+const credentialsProvider = Credentials({
+  name: "credentials",
+  credentials: {
+    email: { label: "Email", type: "email" },
+    password: { label: "Password", type: "password" },
+  },
+  async authorize(credentials) {
+    const parsedCredentials = z
+      .object({ email: z.string().email(), password: z.string().min(6) })
+      .safeParse(credentials)
+
+    if (!parsedCredentials.success) return null
+
+    const { email, password } = parsedCredentials.data
+
+    const user = await prisma.user.findUnique({
+      where: { email },
+    })
+
+    if (!user || !user.password) return null
+
+    const passwordMatch = await bcrypt.compare(password, user.password)
+
+    if (!passwordMatch) return null
+
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      image: user.image,
+    }
+  },
+})
+
 export const authConfig: NextAuthConfig = {
-  providers: [YandexProvider, VKProvider],
+  adapter: PrismaAdapter(prisma),
+  providers: [credentialsProvider, YandexProvider, VKProvider],
   pages: { signIn: "/auth/signin", error: "/auth/error" },
   callbacks: {
     authorized({ auth }) {
@@ -74,19 +114,23 @@ export const authConfig: NextAuthConfig = {
       if (user) {
         token.id = user.id
         token.provider = account?.provider
+        token.email = user.email
+        token.name = user.name
       }
       return token
     },
     session({ session, token }) {
-      if (session.user) {
+      if (session.user && token) {
         session.user.id = token.id as string
         session.user.provider = token.provider as string
+        session.user.email = token.email as string
+        session.user.name = token.name as string
       }
       return session
     },
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt",  // Changed from "database" to "jwt" for better compatibility with credentials provider
     maxAge: 30 * 24 * 60 * 60, // 30 дней
   },
   jwt: {
