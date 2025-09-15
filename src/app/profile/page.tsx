@@ -3,11 +3,11 @@ import Group from "@/assets/group.svg"
 import Question from "@/assets/question.svg"
 import Pencil from "@/assets/pencil.svg"
 import Message from "@/assets/message.svg"
-import Logout from "@/assets/logout.svg"
 import SferaGlobe from "@/assets/globe.svg"
 import DefaultUser from "@/assets/defaultuser.svg"
 import Header from "@/shared/ui/Header"
 import ProfileMenuItem from "./components/ProfileMenuItem"
+import LogoutButton from "./components/LogoutButton"
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
@@ -23,10 +23,7 @@ export default async function ProfilePage() {
     { href: "/profile/questions", icon: Question, text: "Остались вопросы?" },
   ]
 
-  const otherItems = [
-    { href: "/support", icon: Message, text: "Поддержка" },
-    { href: "/api/auth/signout", icon: Logout, text: "Выход" },
-  ]
+  const otherItems = [{ href: "https://t.me/sferasupp_bot", icon: Message, text: "Поддержка" }]
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gray-50">
@@ -85,6 +82,7 @@ export default async function ProfilePage() {
                   text={item.text}
                 />
               ))}
+              <LogoutButton />
             </div>
           </section>
         </div>

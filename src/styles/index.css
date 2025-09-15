@@ -8,6 +8,8 @@
   --color-darkblue: #0C0620;
   --color-boldgray: #F3F3F3;
   --color-indigo: #200F5C;
+  --color-customyellow: #F4C66B;
+  --color-lightyellow: #FFE4A8;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -123,6 +125,39 @@
   body {
     @apply bg-background text-foreground;
   }
-
-
+  body.homepage {
+    @apply bg-darkblue;
+    overflow-x: hidden;
+  }
 }
+.border-extended-diagonal-rounded {
+  position: relative;
+  border-radius: 0 0 1.5rem 1.5rem;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  background:
+    linear-gradient(135deg,
+      transparent -150%,
+      #FFFFFF 15%,
+      rgba(255, 255, 255, 0.4) 55%,
+      #FFFFFF 85%,
+      transparent 250%
+    ) border-box,
+    #0C0620 padding-box;
+}
+
+.step-number-outline {
+  -webkit-text-stroke: 2px;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.step-number-gradient {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.58) 0%, rgba(255,255,255,0) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+

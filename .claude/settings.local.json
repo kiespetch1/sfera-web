@@ -3,7 +3,11 @@
     "allow": [
       "Bash(tree:*)",
       "Bash(mkdir:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(npm run typecheck:*)",
+      "mcp__context7__resolve-library-id",
+      "WebFetch(domain:id.vk.com)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []

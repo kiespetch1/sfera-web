@@ -1,5 +1,5 @@
-import LoginForm from "@/components/LoginForm"
+import AuthForm from "@/components/forms/AuthForm"
 
 export default function SignInPage() {
-  return <LoginForm />
+  return <AuthForm />
 }
