@@ -53,7 +53,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
 
   const handleVKLogin = async () => {
     setIsLoading(true)
-    await signIn("vkid", { callbackUrl: "/profile" })
+    await signIn("vk", { callbackUrl: "/profile" })
   }
 
   return (

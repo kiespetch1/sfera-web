@@ -20,9 +20,9 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-darkblue rounded-b-3xl border-b border-white/10 px-6 py-4 backdrop-blur-sm md:px-12 md:py-6">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
+    <header className="bg-darkblue rounded-b-3xl border-b border-white/10 py-4 backdrop-blur-sm md:py-6">
+      <nav className="mx-10 flex items-center justify-between">
+        <Link href="/public" className="flex items-center space-x-2">
           <SferaGlobe className="h-10 w-10" color="#fff" />
           <span className="text-3xl font-semibold tracking-wider text-white">SFERA</span>
         </Link>
@@ -47,9 +47,7 @@ export default function Header() {
               size="lg"
               className="bg-boldgray text-mainblue flex cursor-pointer items-center space-x-2 rounded-full px-6 py-3 hover:bg-white">
               <User className="h-5 w-5" />
-              <span className="hidden font-semibold sm:inline">
-                {session?.user ? "Личный кабинет" : "Войти"}
-              </span>
+              <span className="hidden font-semibold sm:inline">Личный кабинет</span>
             </Button>
 
             {/* Mobile menu button */}

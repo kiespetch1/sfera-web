@@ -125,39 +125,10 @@
   body {
     @apply bg-background text-foreground;
   }
-  body.homepage {
-    @apply bg-darkblue;
-    overflow-x: hidden;
-  }
-}
-.border-extended-diagonal-rounded {
-  position: relative;
-  border-radius: 0 0 1.5rem 1.5rem;
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
-  border-bottom: 2px solid transparent;
-  background:
-    linear-gradient(135deg,
-      transparent -150%,
-      #FFFFFF 15%,
-      rgba(255, 255, 255, 0.4) 55%,
-      #FFFFFF 85%,
-      transparent 250%
-    ) border-box,
-    #0C0620 padding-box;
 }
 
-.step-number-outline {
-  -webkit-text-stroke: 2px;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+/* Homepage specific styles */
+body.homepage {
+  background-color: var(--color-darkblue);
 }
-
-.step-number-gradient {
-  background: linear-gradient(to bottom, rgba(255,255,255,0.58) 0%, rgba(255,255,255,0) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 

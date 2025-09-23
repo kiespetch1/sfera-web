@@ -1,12 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { signOut } from "next-auth/react"
 import Logout from "@/assets/logout.svg"
 import ProfileMenuItem from "./ProfileMenuItem"
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -17,15 +15,10 @@ import {
 } from "@/components/ui/alert-dialog"
 
 export default function LogoutButton() {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleLogout = async () => {
-    setIsLoading(true)
-    await signOut({ callbackUrl: "/auth/signin" })
-  }
+  const [open, setOpen] = useState(false)
 
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <div>
           <ProfileMenuItem href="#" icon={Logout} text="Выход" />
@@ -40,13 +33,16 @@ export default function LogoutButton() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isLoading}>Отмена</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={handleLogout}
-            disabled={isLoading}
-            className="bg-red-600 text-white hover:bg-red-700">
-            {isLoading ? "Выход..." : "Выйти"}
-          </AlertDialogAction>
+          <AlertDialogCancel>Отмена</AlertDialogCancel>
+          <form action="/api/auth/signout" method="POST">
+            <input type="hidden" name="callbackUrl" value="/auth/signin" />
+            <button
+              type="submit"
+              className="inline-flex h-10 items-center justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+            >
+              Выйти
+            </button>
+          </form>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

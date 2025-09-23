@@ -18,12 +18,12 @@ export const StepBlock: React.FC<StepBlockProps> = ({ stepNumber, text }) => {
   const NumberComponent = numberComponents[stepNumber]
 
   return (
-    <div className="flex w-full flex-col items-start justify-start">
-      <div className="relative h-28 w-32 pt-14 md:h-32 md:w-40">
-        <NumberComponent />
+    <div className="mb-8 flex w-full flex-col items-start justify-start">
+      <div className="mb-1 h-[100px] w-[150px] sm:h-[120px] sm:w-[180px] md:h-[136px] md:w-[202px] lg:h-[160px] lg:w-[240px]">
+        <NumberComponent className="h-full w-full" />
       </div>
 
-      <div className="relative mb-4 w-[222px]">
+      <div className="relative mb-6 w-[222px]">
         <div className="h-[1px] w-full bg-white" />
 
         <div className="absolute -right-1 top-1/2 -translate-y-1/2">
@@ -31,7 +31,7 @@ export const StepBlock: React.FC<StepBlockProps> = ({ stepNumber, text }) => {
         </div>
       </div>
 
-      <p className="text-xl font-light tracking-wide text-white/90 md:text-2xl">{text}</p>
+      <p className="mb-4 text-xl font-light tracking-wide text-white/90 md:text-2xl">{text}</p>
     </div>
   )
 }

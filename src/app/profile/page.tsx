@@ -5,7 +5,7 @@ import Pencil from "@/assets/pencil.svg"
 import Message from "@/assets/message.svg"
 import SferaGlobe from "@/assets/globe.svg"
 import DefaultUser from "@/assets/defaultuser.svg"
-import Header from "@/shared/ui/Header"
+import Header from "@/features/profile/ui/Header"
 import ProfileMenuItem from "./components/ProfileMenuItem"
 import LogoutButton from "./components/LogoutButton"
 import { auth } from "@/lib/auth"
@@ -29,6 +29,7 @@ export default async function ProfilePage() {
     <div className="relative min-h-screen overflow-hidden bg-gray-50">
       <div className="pointer-events-none absolute inset-0">
         <SferaGlobe
+          color="#000"
           className="opacity-2 absolute left-1/2 top-1/2 h-auto w-[150vw] -translate-x-1/2"
           style={{ aspectRatio: "1/1" }}
         />
