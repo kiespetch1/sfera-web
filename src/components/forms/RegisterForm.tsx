@@ -7,7 +7,6 @@ import { useForm } from "@tanstack/react-form"
 import Input from "@/components/ui/Input"
 import { Button } from "@/components/ui/Button"
 
-type FormData = { name: string; email: string; password: string; confirmPassword: string }
 
 interface RegisterFormProps {
   onSwitchToLogin: () => void
@@ -33,22 +32,39 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
       }
 
       try {
-        // Use NextAuth register provider
-        const registerResult = await signIn("register", {
-          email: value.email,
-          password: value.password,
-          name: value.name,
-          redirect: false,
-        })
+        // Register via API endpoint
+        const registerResponse = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: value.name,
+            email: value.email,
+            password: value.password
+          }),
+        });
 
-        if (registerResult?.error) {
-          setServerError(registerResult.error)
-        } else if (registerResult?.ok) {
-          setSuccessMessage("Регистрация успешна! Входим в систему...")
-          router.refresh()
-          router.push("/profile")
+        const registerData = await registerResponse.json();
+
+        if (!registerResponse.ok) {
+          setServerError(registerData.error || "Ошибка при регистрации");
+          return;
+        }
+
+        // After successful registration, sign in automatically
+        const signInResult = await signIn("credentials", {
+          username: value.email,
+          password: value.password,
+          redirect: false,
+        });
+
+        if (signInResult?.error) {
+          setServerError("Регистрация успешна, но не удалось автоматически войти в систему");
+        } else if (signInResult?.ok) {
+          setSuccessMessage("Регистрация успешна! Входим в систему...");
+          router.refresh();
+          router.push("/profile");
         } else {
-          setServerError("Ошибка при регистрации")
+          setServerError("Ошибка при входе в систему");
         }
       } catch {
         setServerError("Произошла ошибка при регистрации")

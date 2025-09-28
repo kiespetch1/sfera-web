@@ -7,7 +7,13 @@
       "Bash(npm run typecheck:*)",
       "mcp__context7__resolve-library-id",
       "WebFetch(domain:id.vk.com)",
-      "WebSearch"
+      "WebSearch",
+      "mcp__serena__get_current_config",
+      "mcp__serena__activate_project",
+      "mcp__serena__find_file",
+      "mcp__serena__search_for_pattern",
+      "mcp__serena__list_dir",
+      "mcp__serena__write_memory"
     ],
     "deny": [],
     "ask": []

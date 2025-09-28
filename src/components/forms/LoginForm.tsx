@@ -6,9 +6,7 @@ import { signIn } from "next-auth/react"
 import { useForm } from "@tanstack/react-form"
 import Input from "@/components/ui/Input"
 import { Button } from "@/components/ui/Button"
-import OAuthButton from "@/components/ui/OAuthButton"
 
-type FormData = { email: string; password: string }
 
 interface LoginFormProps {
   onSwitchToRegister: () => void
@@ -27,7 +25,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
 
       try {
         const result = await signIn("credentials", {
-          email: value.email,
+          username: value.email,
           password: value.password,
           redirect: false,
         })
@@ -46,15 +44,6 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
     },
   })
 
-  const handleYandexLogin = async () => {
-    setIsLoading(true)
-    await signIn("yandex", { callbackUrl: "/profile" })
-  }
-
-  const handleVKLogin = async () => {
-    setIsLoading(true)
-    await signIn("vk", { callbackUrl: "/profile" })
-  }
 
   return (
     <div className="w-full max-w-md space-y-8">
@@ -128,25 +117,6 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
           )}
         </form.Subscribe>
 
-        <div className="relative my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300"></div>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="bg-gray-50 px-4 text-gray-500">или</span>
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <OAuthButton provider="yandex" onClick={handleYandexLogin} disabled={isLoading}>
-            Войти с Яндекс ID
-          </OAuthButton>
-
-          <OAuthButton provider="vk" onClick={handleVKLogin} disabled={isLoading}>
-            <span className="mr-1">ID</span>
-            <span>Войти через VK ID</span>
-          </OAuthButton>
-        </div>
 
         <div className="mt-6 text-center text-sm text-gray-600">
           Если вы ошиблись адресом почты при регистрации - обратитесь в{" "}
