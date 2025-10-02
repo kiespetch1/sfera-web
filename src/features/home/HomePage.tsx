@@ -5,6 +5,9 @@ import Header from "@/features/home/components/Header"
 import HeroSection from "@/features/home/sections/HeroSection"
 import { HowItWorksSection } from "@/features/home/sections/HowItWorksSection"
 import { BackgroundEllipses } from "@/features/home/components/BackgroundEllipses"
+import { WhySferaSection } from "@/features/home/sections/WhySferaSection"
+import { FaqSection } from "@/features/home/sections/FaqSection"
+import { Footer } from "@/features/home/components/Footer"
 
 export const HomePage = () => {
   const { data: session } = useSession()
@@ -18,11 +21,14 @@ export const HomePage = () => {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-darkblue">
+    <div className="bg-darkblue relative min-h-screen overflow-hidden">
       <BackgroundEllipses />
       <Header />
       <HeroSection onGetChart={handleGetChart} />
       <HowItWorksSection />
+      <WhySferaSection />
+      <FaqSection />
+      <Footer />
     </div>
   )
 }

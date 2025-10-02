@@ -16,10 +16,10 @@ export default function Header() {
 
   return (
     <header className="border-darkblue flex w-full items-center justify-between rounded-3xl border-b bg-white px-10 py-4">
-      <div className="text-darkblue flex items-center gap-2 text-3xl font-semibold">
+      <Link href="/" className="text-darkblue flex items-center gap-2 text-3xl font-semibold">
         <SferaGlobe className="h-8 w-8" color="#0C0620" />
         SFERA
-      </div>
+      </Link>
 
       <nav className="hidden gap-6 md:flex">
         {navigationItems.map(item => (

@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <header className="bg-darkblue rounded-b-3xl border-b border-white/10 py-4 backdrop-blur-sm md:py-6">
       <nav className="mx-10 flex items-center justify-between">
-        <Link href="/public" className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-2" aria-label="SFERA главная">
           <SferaGlobe className="h-10 w-10" color="#fff" />
           <span className="text-3xl font-semibold tracking-wider text-white">SFERA</span>
         </Link>
@@ -45,6 +45,7 @@ export default function Header() {
               onClick={handleAuthAction}
               variant="secondary"
               size="lg"
+              bold
               className="bg-boldgray text-mainblue flex cursor-pointer items-center space-x-2 rounded-full px-6 py-3 hover:bg-white">
               <User className="h-5 w-5" />
               <span className="hidden font-semibold sm:inline">Личный кабинет</span>

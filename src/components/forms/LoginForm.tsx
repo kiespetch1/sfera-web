@@ -7,7 +7,6 @@ import { useForm } from "@tanstack/react-form"
 import Input from "@/components/ui/Input"
 import { Button } from "@/components/ui/Button"
 
-
 interface LoginFormProps {
   onSwitchToRegister: () => void
 }
@@ -31,7 +30,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
         })
 
         if (result?.error) {
-          setServerError("Неверный email или пароль")
+          setServerError("Неверная эл. почта или пароль")
         } else if (result?.ok) {
           router.refresh()
           router.push("/profile")
@@ -43,7 +42,6 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
       }
     },
   })
-
 
   return (
     <div className="w-full max-w-md space-y-8">
@@ -104,24 +102,31 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
         )}
 
         <div className="text-left">
-          <Button type="button" variant="link" className="mb-10 mt-3">
+          <Button type="button" variant="link" size="text" className="mb-10 mt-3">
             Восстановить пароль
           </Button>
         </div>
 
         <form.Subscribe selector={state => [state.canSubmit, state.isSubmitting]}>
           {([canSubmit]) => (
-            <Button type="submit" fullWidth disabled={!canSubmit || isLoading} className="m-0">
-              {isLoading ? "Загрузка..." : "Войти"}
+            <Button
+              variant="default"
+              type="submit"
+              size="2xl"
+              fullWidth
+              bold
+              disabled={!canSubmit || isLoading}
+              className="m-0">
+              {isLoading ? "..." : "Войти"}
             </Button>
           )}
         </form.Subscribe>
-
 
         <div className="mt-6 text-center text-sm text-gray-600">
           Если вы ошиблись адресом почты при регистрации - обратитесь в{" "}
           <Button
             variant="link"
+            size="text"
             onClick={() => window.open("https://t.me/sferasupp_bot", "_blank")}
             type="button">
             поддержку
@@ -134,6 +139,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             type="button"
             onClick={onSwitchToRegister}
             variant="link"
+            size="text"
             className="font-bold">
             Зарегистрироваться
           </Button>
