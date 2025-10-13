@@ -3,7 +3,7 @@ import { QuestionBlock } from "@/features/home/components/QuestionBlock"
 
 export const FaqSection = () => {
   return (
-    <div className="flex flex-col justify-center pl-[110px]">
+    <section id="faq" className="flex flex-col justify-center pl-[110px]">
       <h1 className="mb-12 self-start text-5xl font-semibold text-white">Частые вопросы</h1>
       <div className="flex flex-col justify-center space-y-12">
         <QuestionBlock
@@ -22,6 +22,6 @@ export const FaqSection = () => {
           dividerLength={330}
         />
       </div>
-    </div>
+    </section>
   )
 }

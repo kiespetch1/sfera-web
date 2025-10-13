@@ -5,7 +5,7 @@ import ZodiacSymbols from "@/assets/zodiacsymbols.svg"
 
 export const HowItWorksSection = () => {
   return (
-    <section data-section="works" className="relative">
+    <section data-section="works" id="how-it-works" className="relative">
       <div
         className="absolute inset-0 -z-10"
         style={{
